@@ -1,4 +1,5 @@
 import os
+import time
 
 from selene import browser, be, have
 
@@ -13,13 +14,12 @@ def test_fill_form():
     browser.element('#lastName').should(be.blank).type('З')
     browser.element('#userEmail').should(be.blank).type('test@mail.ru')
     browser.element('[value=Female]').double_click()
-    browser.element('#userNumber').should(be.blank).type('792700000000')
+    browser.element('#userNumber').should(be.blank).type('7927000000')
     browser.element('#dateOfBirthInput').click()
     browser.element('.react-datepicker__month-select').element('[value = "6"]').click()
     browser.element('.react-datepicker__year-select').element('[value = "1995"]').click()
     browser.element('.react-datepicker__month').element('.react-datepicker__day--020').click()
-    browser.element("#subjectsInput").type('A')
-    browser.element('.subjects-auto-complete__menu').should(have.text('Arts')).click()
+    browser.element('#subjectsInput').type('Arts').press_tab()
     browser.element('label[for="hobbies-checkbox-3"]').click()
     browser.element('#uploadPicture').send_keys(file_path)
     browser.element("[placeholder='Current Address']").type("Samara")
@@ -33,7 +33,7 @@ def test_fill_form():
             'Female',
             '7927000000',
             '20 July,1995',
-            'Accounting',
+            'Arts',
             'Music',
             'image.jpg',
             'Samara',
